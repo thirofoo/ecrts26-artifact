@@ -1,9 +1,15 @@
-# ECRTS 2026 Artifact: Probabilistic Schedulability Analysis
+# Artifact Evaluation: ECRTS 2026
 
-This artifact accompanies the ECRTS 2026 paper "Probabilistic Schedulability
-Analysis for Mixed-Criticality DAG Tasks on Multiprocessors". It contains the
-analysis code, DAG-generation wrapper, experiment drivers, and plotting scripts
-used for the paper evaluation.
+This repository contains the source code, generated data, and evaluation scripts for the artifact evaluation of the following accepted paper at **ECRTS 2026**:
+
+* **Paper Title:** Probabilistic Schedulability Analysis for Mixed-Criticality DAG Tasks on Multiprocessors
+* **Authors:** Hiroto Takahashi, Atsushi Yano, Takuya Azumi
+* **Conference:** 38th Euromicro Conference on Real-Time Systems (ECRTS 2026)
+
+---
+
+It contains the analysis code, DAG-generation wrapper, experiment drivers, and
+plotting scripts used for the paper evaluation.
 
 ## What to Evaluate
 
