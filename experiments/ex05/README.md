@@ -163,8 +163,8 @@ Example:
 
 ```bash
 uv run python experiments/ex05/05_3_rq3_eval.py \
-  --rq1-run-dir data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__chain \
-  --run-id ex05_3__chain_10sec \
+  --rq1-run-dir data/results/ex05_1/rq1__chain \
+  --run-id rq3__chain \
   --max-sets 1000 \
   --cluster-time-limit 10
 ```

@@ -147,8 +147,8 @@ WORKERS=$(nproc) ./reproduce.sh full
 ```bash
 uv run python experiments/ex05/05_1_rq1_eval.py \
   --pre-run-dir data/results/ex05_pre/05_pre1 \
-  --output-dir data/results/ex05_1/ex05_1_final_ECRTS \
-  --run-id ex05_1_final_1sec \
+  --output-dir data/results/ex05_1 \
+  --run-id rq1 \
   --method auto \
   --axis cp \
   --sets-per-bin 100 \
@@ -158,10 +158,10 @@ uv run python experiments/ex05/05_1_rq1_eval.py \
   --cluster-quiet
 
 uv run python experiments/ex06/06_ex05_1_boxplot.py \
-  --input data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__fan-in
+  --input data/results/ex05_1/rq1__fan-in
 
 uv run python experiments/ex06/06_ex05_1_boxplot.py \
-  --input data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__chain
+  --input data/results/ex05_1/rq1__chain
 ```
 
 ### Figure 4 / RQ2
@@ -169,7 +169,7 @@ uv run python experiments/ex06/06_ex05_1_boxplot.py \
 ```bash
 uv run python experiments/ex05/05_2_rq2_eval.py \
   --pre-run-dir data/results/ex05_pre/05_pre1 \
-  --run-id ex05_2_1000 \
+  --run-id rq2 \
   --method mixed \
   --sets-per-bin 1000 \
   --taskset-nodes-max 1000 \
@@ -180,29 +180,29 @@ uv run python experiments/ex05/05_2_rq2_eval.py \
   --cluster-quiet
 
 uv run python experiments/ex06/06_ex05_2_boxplot.py \
-  --input data/results/ex05_2/ex05_2_1000
+  --input data/results/ex05_2/rq2
 ```
 
 ### Figure 5 / RQ3
 
 ```bash
 uv run python experiments/ex05/05_3_rq3_eval.py \
-  --rq1-run-dir data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__chain \
-  --run-id ex05_3__chain_10sec \
+  --rq1-run-dir data/results/ex05_1/rq1__chain \
+  --run-id rq3__chain \
   --max-sets 1000 \
   --cluster-time-limit 10
 
 uv run python experiments/ex05/05_3_rq3_eval.py \
-  --rq1-run-dir data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__fan-in \
-  --run-id ex05_3__fan-in_10sec \
+  --rq1-run-dir data/results/ex05_1/rq1__fan-in \
+  --run-id rq3__fan-in \
   --max-sets 1000 \
   --cluster-time-limit 10
 
 uv run python experiments/ex06/06_ex05_3_compare.py \
-  --input-rq1 data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__chain \
-  --input-rq3 data/results/ex05_3/ex05_3__chain_10sec \
-  --input-rq1-right data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__fan-in \
-  --input-rq3-right data/results/ex05_3/ex05_3__fan-in_10sec \
+  --input-rq1 data/results/ex05_1/rq1__chain \
+  --input-rq3 data/results/ex05_3/rq3__chain \
+  --input-rq1-right data/results/ex05_1/rq1__fan-in \
+  --input-rq3-right data/results/ex05_3/rq3__fan-in \
   --heatmap
 ```
 
@@ -215,6 +215,14 @@ Each run records:
 - `tasksets/taskset_XXXX.json`: generated tasksets.
 - `*_results.csv`: per-taskset results.
 - `plots/`: generated figures in PNG/PDF form.
+
+### Mapping to Paper Figures
+
+| Paper Figure | Output File(s) |
+| --- | --- |
+| Figure 3 (required cores, RQ1) | `data/results/ex05_1/rq1__chain/plots/rq1_cores_cp.png` and `…rq1__fan-in/plots/rq1_cores_cp.png` |
+| Figure 4 (failure-budget sensitivity, RQ2) | `data/results/ex05_2/rq2/plots/rq2_cores_win_tie_loss_fs_pairs_proposed.png` |
+| Figure 5 (1 s vs 10 s, RQ3) | `data/results/ex05_3/plots/rq3_compare_scatter_heatmap_panel_cluster_multipath_cp.png` |
 
 ## Notes for Evaluators
 

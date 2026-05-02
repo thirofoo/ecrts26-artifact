@@ -73,13 +73,13 @@ smoke() {
 }
 
 full() {
-  local rq1_output_dir="data/results/ex05_1/ex05_1_final_ECRTS"
-  local rq1_run_id="ex05_1_final_1sec"
+  local rq1_output_dir="data/results/ex05_1"
+  local rq1_run_id="rq1"
   local rq1_chain_dir="${rq1_output_dir}/${rq1_run_id}__chain"
   local rq1_fanin_dir="${rq1_output_dir}/${rq1_run_id}__fan-in"
-  local rq2_run_dir="data/results/ex05_2/ex05_2_1000"
-  local rq3_chain_dir="data/results/ex05_3/ex05_3__chain_10sec"
-  local rq3_fanin_dir="data/results/ex05_3/ex05_3__fan-in_10sec"
+  local rq2_run_dir="data/results/ex05_2/rq2"
+  local rq3_chain_dir="data/results/ex05_3/rq3__chain"
+  local rq3_fanin_dir="data/results/ex05_3/rq3__fan-in"
 
   uv run python experiments/ex05/05_pre1_generate_dags.py \
     --run-id 05_pre1 \
@@ -105,28 +105,31 @@ full() {
 
   uv run python experiments/ex05/05_2_rq2_eval.py \
     --pre-run-dir data/results/ex05_pre/05_pre1 \
-    --run-id ex05_2_1000 \
+    --run-id rq2 \
     --method mixed \
     --sets-per-bin 1000 \
     --taskset-nodes-max 1000 \
     --fi-mode per-hour \
-    --fi-profiles fixed,loguniform \
+    --fi-profiles fixed \
     --federated-max-cores 1000 \
     --cluster-time-limit 1 \
     --cluster-quiet
 
   uv run python experiments/ex06/06_ex05_2_boxplot.py \
-    --input "${rq2_run_dir}"
+    --input "${rq2_run_dir}" \
+    --scatter-fs-pairs all \
+    --scatter-methods ours \
+    --fi-profile fixed
 
   uv run python experiments/ex05/05_3_rq3_eval.py \
     --rq1-run-dir "${rq1_chain_dir}" \
-    --run-id ex05_3__chain_10sec \
+    --run-id rq3__chain \
     --max-sets 1000 \
     --cluster-time-limit 10
 
   uv run python experiments/ex05/05_3_rq3_eval.py \
     --rq1-run-dir "${rq1_fanin_dir}" \
-    --run-id ex05_3__fan-in_10sec \
+    --run-id rq3__fan-in \
     --max-sets 1000 \
     --cluster-time-limit 10
 
@@ -135,7 +138,8 @@ full() {
     --input-rq3 "${rq3_chain_dir}" \
     --input-rq1-right "${rq1_fanin_dir}" \
     --input-rq3-right "${rq3_fanin_dir}" \
-    --heatmap
+    --heatmap \
+    --exclude-bins BIN_CP_7
 }
 
 case "${MODE}" in

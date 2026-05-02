@@ -58,8 +58,8 @@ Outputs:
 ```bash
 uv run python experiments/ex05/05_1_rq1_eval.py \
   --pre-run-dir data/results/ex05_pre/05_pre1 \
-  --output-dir data/results/ex05_1/ex05_1_final_ECRTS \
-  --run-id ex05_1_final_1sec \
+  --output-dir data/results/ex05_1 \
+  --run-id rq1 \
   --method auto \
   --axis cp \
   --sets-per-bin 100 \
@@ -71,17 +71,17 @@ uv run python experiments/ex05/05_1_rq1_eval.py \
 
 `--method auto` runs fan-in and chain as separate run directories:
 
-- `data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__fan-in/`
-- `data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__chain/`
+- `data/results/ex05_1/rq1__fan-in/`
+- `data/results/ex05_1/rq1__chain/`
 
 Plot each directory:
 
 ```bash
 uv run python experiments/ex06/06_ex05_1_boxplot.py \
-  --input data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__fan-in
+  --input data/results/ex05_1/rq1__fan-in
 
 uv run python experiments/ex06/06_ex05_1_boxplot.py \
-  --input data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__chain
+  --input data/results/ex05_1/rq1__chain
 ```
 
 ## RQ2
@@ -89,7 +89,7 @@ uv run python experiments/ex06/06_ex05_1_boxplot.py \
 ```bash
 uv run python experiments/ex05/05_2_rq2_eval.py \
   --pre-run-dir data/results/ex05_pre/05_pre1 \
-  --run-id ex05_2_1000 \
+  --run-id rq2 \
   --method mixed \
   --sets-per-bin 1000 \
   --taskset-nodes-max 1000 \
@@ -104,7 +104,7 @@ Plot the result:
 
 ```bash
 uv run python experiments/ex06/06_ex05_2_boxplot.py \
-  --input data/results/ex05_2/ex05_2_1000
+  --input data/results/ex05_2/rq2
 ```
 
 Key defaults:
@@ -118,14 +118,14 @@ Key defaults:
 
 ```bash
 uv run python experiments/ex05/05_3_rq3_eval.py \
-  --rq1-run-dir data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__chain \
-  --run-id ex05_3__chain_10sec \
+  --rq1-run-dir data/results/ex05_1/rq1__chain \
+  --run-id rq3__chain \
   --max-sets 1000 \
   --cluster-time-limit 10
 
 uv run python experiments/ex05/05_3_rq3_eval.py \
-  --rq1-run-dir data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__fan-in \
-  --run-id ex05_3__fan-in_10sec \
+  --rq1-run-dir data/results/ex05_1/rq1__fan-in \
+  --run-id rq3__fan-in \
   --max-sets 1000 \
   --cluster-time-limit 10
 ```
@@ -134,10 +134,10 @@ Plot the side-by-side comparison:
 
 ```bash
 uv run python experiments/ex06/06_ex05_3_compare.py \
-  --input-rq1 data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__chain \
-  --input-rq3 data/results/ex05_3/ex05_3__chain_10sec \
-  --input-rq1-right data/results/ex05_1/ex05_1_final_ECRTS/ex05_1_final_1sec__fan-in \
-  --input-rq3-right data/results/ex05_3/ex05_3__fan-in_10sec \
+  --input-rq1 data/results/ex05_1/rq1__chain \
+  --input-rq3 data/results/ex05_3/rq3__chain \
+  --input-rq1-right data/results/ex05_1/rq1__fan-in \
+  --input-rq3-right data/results/ex05_3/rq3__fan-in \
   --heatmap
 ```
 

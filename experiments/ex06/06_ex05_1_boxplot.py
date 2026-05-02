@@ -496,9 +496,7 @@ def order_bins(values: Iterable[str], axis: str) -> List[str]:
     config = AXIS_CONFIG[axis]
     order = list(config["order"])
     existing = set(values)
-    ordered = [label for label in order if label in existing]
-    remaining = sorted(existing - set(ordered))
-    return ordered + remaining
+    return [label for label in order if label in existing]
 
 
 def extract_series(

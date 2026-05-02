@@ -1003,7 +1003,7 @@ def main() -> None:
     source_label = args.label_source or time_label_from_meta(rq1_meta, "source")
     target_label = args.label_target or time_label_from_meta(rq3_meta, "target")
 
-    output_dir = args.output_dir or (rq3_path.parent / "plots")
+    output_dir = args.output_dir or (rq3_path.parent.parent / "plots")
     output_dir.mkdir(parents=True, exist_ok=True)
 
     axes = parse_axes(args.axes)
@@ -1090,8 +1090,9 @@ def main() -> None:
                 output_dir / f"rq3_compare_scatter_{field_tag}_{axis}.png",
             )
             if args.heatmap:
+                filtered_pairs = [p for p in pairs if axis_key(p, axis) not in exclude_bins]
                 plot_scatter_heatmap(
-                    pairs,
+                    filtered_pairs,
                     axis,
                     source_label,
                     target_label,
@@ -1101,11 +1102,12 @@ def main() -> None:
                     output_dir / f"rq3_compare_scatter_heatmap_{field_tag}_{axis}.png",
                 )
                 if right_pairs:
-                    left_title = infer_panel_label(args.panel_left_label, pairs)
-                    right_title = infer_panel_label(args.panel_right_label, right_pairs)
+                    filtered_right = [p for p in right_pairs if axis_key(p, axis) not in exclude_bins]
+                    left_title = infer_panel_label(args.panel_left_label, filtered_pairs)
+                    right_title = infer_panel_label(args.panel_right_label, filtered_right)
                     plot_scatter_heatmap_panel(
-                        pairs,
-                        right_pairs,
+                        filtered_pairs,
+                        filtered_right,
                         axis,
                         source_label,
                         target_label,
