@@ -1,0 +1,28 @@
+Seed: 42
+Number of DAGs: 1
+
+Graph structure:
+  Generation method: "Fan-in/Fan-out"
+  Number of nodes:
+    Fixed: 20
+  In-degree:
+    Random: [1, 2, 3]
+  Out-degree:
+    Random: [1, 2, 3]
+  Number of source nodes:
+    Fixed: 1
+  Number of sink nodes:
+    Fixed: 1
+  Ensure weakly connected: True
+
+Properties:
+  Execution time:
+    Random: (10, 100, 1)
+
+Output formats:
+  Naming of combination directory: "Abbreviation"
+  DAG:
+    YAML: False
+    JSON: False
+    XML: True
+    DOT: False

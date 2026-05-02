@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "evaluation-master"
+version = "0.1.0"
+description = "Artifact scripts for probabilistic schedulability analysis of mixed-criticality DAG tasks"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "click>=8.3.1",
+    "defusedxml>=0.7.1",
+    "matplotlib>=3.10.8",
+    "networkx>=3.6.1",
+    "numpy>=2.4.0",
+    "pandas>=2.3.3",
+    "pyyaml>=6.0.3",
+    "schema>=0.7.8",
+    "scipy>=1.16.3",
+    "tqdm>=4.67.1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]

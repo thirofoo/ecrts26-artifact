@@ -1,0 +1,3 @@
+[submodule "external/RD-Gen"]
+	path = external/RD-Gen
+	url = https://github.com/azu-lab/RD-Gen.git
