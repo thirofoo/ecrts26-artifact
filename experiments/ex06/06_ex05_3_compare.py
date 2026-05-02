@@ -756,8 +756,7 @@ def plot_scatter_heatmap_panel(
     fig.subplots_adjust(left=0.065, right=0.898, top=0.90, bottom=0.16, wspace=0.06)
     # Make the shared colorbar taller/wider so it visually balances two panels.
     cax = fig.add_axes([0.905, 0.145, 0.026, 0.77])
-    clipped = vmax_override is not None and vmax > norm_vmax
-    cbar = fig.colorbar(im, cax=cax, label="count", extend="max" if clipped else "neither")
+    cbar = fig.colorbar(im, cax=cax, label="count", extend="max")
     if color_scale.strip().lower() != "log":
         cbar.locator = MaxNLocator(integer=True)
         cbar.update_ticks()
