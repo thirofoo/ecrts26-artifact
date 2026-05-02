@@ -71,10 +71,26 @@ Quick functional check:
 ./reproduce.sh check
 ```
 
+## Docker
+
+The Docker image includes Python 3.13, locked Python dependencies, this source
+tree, and the RD-Gen submodule contents.
+
+```bash
+docker build -t ecrts2026-mc-dag-artifact .
+docker run --rm ecrts2026-mc-dag-artifact ./reproduce.sh check
+```
+
 For a reduced end-to-end test:
 
 ```bash
 WORKERS=4 ./reproduce.sh smoke
+```
+
+With Docker:
+
+```bash
+docker run --rm -e WORKERS=4 ecrts2026-mc-dag-artifact ./reproduce.sh smoke
 ```
 
 ## Reproduce Main Results

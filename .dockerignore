@@ -1,0 +1,9 @@
+.git
+.agents
+.codex
+.venv
+.uv-cache
+data
+__pycache__
+*.pyc
+.DS_Store
