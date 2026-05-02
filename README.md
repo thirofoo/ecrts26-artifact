@@ -54,7 +54,7 @@ Evaluator requirements:
 - Python 3.13
 - `uv`
 - Git submodules
-- Docker/OCI support is planned but not yet the documented path in this revision.
+- Docker or another OCI-compatible runtime, for containerized reproduction.
 
 ## Setup
 
@@ -84,14 +84,21 @@ docker run --rm ecrts2026-mc-dag-artifact ./reproduce.sh check
 For a reduced end-to-end test:
 
 ```bash
-WORKERS=4 ./reproduce.sh smoke
+./reproduce.sh smoke
 ```
 
 With Docker:
 
 ```bash
-docker run --rm -e WORKERS=4 ecrts2026-mc-dag-artifact ./reproduce.sh smoke
+mkdir -p data
+docker run --rm -v "$PWD/data:/artifact/data" \
+  ecrts2026-mc-dag-artifact ./reproduce.sh smoke
 ```
+
+The smoke run generates a reduced DAG pool with 10 DAGs per retained CPR bin
+and method. It then runs the RQ1/RQ3 chain workflow, the RQ2 mixed-method
+workflow, and the corresponding plotting scripts. It is intended as a
+functional check, not as a statistical reproduction of the paper figures.
 
 ## Reproduce Main Results
 
@@ -102,6 +109,19 @@ uv run python experiments/ex05/05_pre1_generate_dags.py \
   --run-id 05_pre1 \
   --workers 8
 ```
+
+> **Using pre-generated DAGs.**
+> DAG generation is deterministic (fixed seeds) and produces identical task
+> sets across environments, but it can take a long time depending on hardware.
+> A pre-generated DAG pool is included at `data/pregenerated_dags.zip`.
+> To skip the generation step, unzip it into the expected location:
+>
+> ```bash
+> mkdir -p data/results/ex05_pre/05_pre1
+> unzip data/pregenerated_dags.zip -d data/results/ex05_pre/05_pre1
+> ```
+>
+> After unzipping, proceed directly to the RQ1/RQ2/RQ3 evaluation steps below.
 
 The same full workflow can be launched as one command:
 

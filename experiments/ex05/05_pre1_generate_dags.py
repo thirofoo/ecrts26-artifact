@@ -628,7 +628,7 @@ CPR_CLASSES_10 = [
     _cpr_bin_label(CPR_BIN_EDGES[i], CPR_BIN_EDGES[i + 1]) for i in range(10)
 ]
 CPR_CLASSES_3 = ("small", "middle", "big")
-CPR_EXCLUDED_BINS = {"0.0_0.1", "0.9_1.0"}
+CPR_EXCLUDED_BINS = {"0.0_0.1", "0.7_0.8", "0.8_0.9", "0.9_1.0"}
 
 
 def classify_cpr(ratio: float | None) -> str | None:

@@ -41,7 +41,7 @@ Important defaults:
 
 - `--rdgen-method both`: generate both fan-in and chain DAGs.
 - `--class-cap 100`: keep up to 100 DAGs per CPR bin and per method.
-- CPR bins `[0.1, 0.2)` through `[0.8, 0.9)` are retained.
+- CPR bins `[0.1, 0.2)` through `[0.6, 0.7)` are retained.
 - Node count is filtered to `[20, 100]`.
 - `C^HI` is sampled from `[50, 500]`.
 

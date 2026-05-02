@@ -34,8 +34,6 @@ AXIS_CONFIG = {
             "BIN_CP_4",
             "BIN_CP_5",
             "BIN_CP_6",
-            "BIN_CP_7",
-            "BIN_CP_8",
         ],
         "display_map": {
             "BIN_CP_1": "[0.1, 0.2)",
@@ -44,8 +42,6 @@ AXIS_CONFIG = {
             "BIN_CP_4": "[0.4, 0.5)",
             "BIN_CP_5": "[0.5, 0.6)",
             "BIN_CP_6": "[0.6, 0.7)",
-            "BIN_CP_7": "[0.7, 0.8)",
-            "BIN_CP_8": "[0.8, 0.9)",
         },
         "prefix": "",
     },
@@ -200,8 +196,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--exclude-bins",
         type=str,
-        default="BIN_CP_7",
-        help="Comma-separated bin labels to exclude (e.g., BIN_CP_7).",
+        default="",
+        help="Comma-separated bin labels to exclude (e.g., BIN_CP_6).",
     )
     parser.add_argument(
         "--include-critical",

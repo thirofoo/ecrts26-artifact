@@ -29,28 +29,28 @@ check() {
 smoke() {
   uv run python experiments/ex05/05_pre1_generate_dags.py \
     --run-id smoke_pre \
-    --class-cap 1 \
+    --class-cap 10 \
     --workers "${WORKERS}"
 
   uv run python experiments/ex05/05_1_rq1_eval.py \
     --pre-run-dir data/results/ex05_pre/smoke_pre \
     --run-id smoke_rq1 \
-    --method mixed \
+    --method chain \
     --axis cp \
-    --sets-per-bin 1 \
+    --sets-per-bin 10 \
     --taskset-nodes-max 200 \
     --fi-mode per-hour \
     --cluster-time-limit 0.1 \
     --cluster-quiet
 
   uv run python experiments/ex06/06_ex05_1_boxplot.py \
-    --input data/results/ex05_1/smoke_rq1
+    --input data/results/ex05_1/smoke_rq1__chain
 
   uv run python experiments/ex05/05_2_rq2_eval.py \
     --pre-run-dir data/results/ex05_pre/smoke_pre \
     --run-id smoke_rq2 \
     --method mixed \
-    --sets-per-bin 2 \
+    --sets-per-bin 10 \
     --taskset-nodes-max 200 \
     --fi-mode per-hour \
     --fi-profiles fixed,loguniform \
@@ -62,13 +62,13 @@ smoke() {
     --input data/results/ex05_2/smoke_rq2
 
   uv run python experiments/ex05/05_3_rq3_eval.py \
-    --rq1-run-dir data/results/ex05_1/smoke_rq1 \
+    --rq1-run-dir data/results/ex05_1/smoke_rq1__chain \
     --run-id smoke_rq3 \
-    --max-sets 2 \
+    --max-sets 10 \
     --cluster-time-limit 0.2
 
   uv run python experiments/ex06/06_ex05_3_compare.py \
-    --input-rq1 data/results/ex05_1/smoke_rq1 \
+    --input-rq1 data/results/ex05_1/smoke_rq1__chain \
     --input-rq3 data/results/ex05_3/smoke_rq3
 }
 

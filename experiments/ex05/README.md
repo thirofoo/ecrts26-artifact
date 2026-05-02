@@ -10,7 +10,7 @@ Generates the DAG pool used by RQ1, RQ2, and RQ3.
 
 Default behavior:
 
-- CPR rosters cover `[0.1, 0.2)` through `[0.8, 0.9)`.
+- CPR rosters cover `[0.1, 0.2)` through `[0.6, 0.7)`.
 - `--class-cap 100`: up to 100 DAGs per CPR bin and per method.
 - `--rdgen-method both`: generate both fan-in and chain DAGs.
 - `--chain-extra-edges-min 0 --chain-extra-edges-max 0`: no extra random chain edges.
