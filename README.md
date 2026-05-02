@@ -113,7 +113,7 @@ First generate the DAG pool:
 ```bash
 uv run python experiments/ex05/05_pre1_generate_dags.py \
   --run-id 05_pre1 \
-  --workers 8
+  --workers $(nproc)
 ```
 
 > **Using pre-generated DAGs.**
@@ -132,8 +132,15 @@ uv run python experiments/ex05/05_pre1_generate_dags.py \
 The same full workflow can be launched as one command:
 
 ```bash
-WORKERS=8 ./reproduce.sh full
+WORKERS=$(nproc) ./reproduce.sh full
 ```
+
+> **Note on parallelism.**
+> The `WORKERS` variable controls only the number of parallel DAG-generation
+> processes. Our paper results were obtained with 8 workers on an 8-core
+> machine, but the degree of parallelism has virtually no effect on the
+> evaluation results. Changing `WORKERS` simply affects the wall-clock time
+> for the generation step.
 
 ### Figure 3 / RQ1
 
